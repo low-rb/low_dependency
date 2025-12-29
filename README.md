@@ -1,4 +1,4 @@
-<a href="https://rubygems.org/gems/low_dependency" title="Install gem"><img src="https://badge.fury.io/rb/low_dependency.svg" alt="Gem version" height="18"></a>
+<a href="https://rubygems.org/gems/low_dependency" title="Install gem"><img src="https://badge.fury.io/rb/low_dependency.svg" alt="Gem version" height="18"></a> <a href="https://github.com/low-rb/low_dependency" title="GitHub"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub repo" height="18"></a> <a href="https://codeberg.org/Iow/dependency" title="Codeberg"><img src="https://img.shields.io/badge/Codeberg-2185D0?style=for-the-badge&logo=Codeberg&logoColor=white" alt="Codeberg repo" height="18"></a>
 
 # LowDependency
 
@@ -47,7 +47,7 @@ end
 
 ## Mixing dependency types
 
-LowDependency lets you do something quite special; mix "classical" dependency injection (passing an arg to `new`) with "provider" style dependency injection (populating an arg via framework):
+LowDependency lets you do something special; mix "classical" dependency injection (passing an arg to `new`) with "provider" style dependency injection (populating an arg via framework):
 
 ```ruby
 # Define both a "provider" and a "classical" dependency:
@@ -66,7 +66,7 @@ MyClass.new(classical_dependency: ClassicalDependency.new)
 
 The `provider_dependency` argument will automatically be injected by LowDependency!
 
-Now you get to have your classical dependency cake 🍰 and eat it too with an automatically injected dependency spoon! 🥣
+Now you get to have your classical dependency cake 🍰 and eat it too with an automatically injected dependency spoon 🥣
 
 ## Installation
 
