@@ -1,7 +1,14 @@
 PATH
+  remote: ../expressions
+  specs:
+    expressions (0.0.0)
+      low_type (~> 1.0)
+
+PATH
   remote: .
   specs:
-    dependency (0.0.1)
+    low_dependency (0.0.1)
+      expressions
 
 GEM
   remote: https://rubygems.org/
@@ -12,6 +19,7 @@ GEM
     json (2.16.0)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
+    low_type (1.1.4)
     method_source (1.1.0)
     parallel (1.27.0)
     parser (3.3.10.0)
@@ -67,7 +75,8 @@ PLATFORMS
   x86_64-darwin-22
 
 DEPENDENCIES
-  dependency!
+  expressions!
+  low_dependency!
   pry
   pry-nav
   rack

@@ -24,4 +24,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
   spec.bindir = 'exe'
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
+
+  spec.add_dependency 'expressions'
 end
