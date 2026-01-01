@@ -2,10 +2,16 @@
 
 module Low
   class Provider
-    attr_reader :name
+    attr_reader :key, :result
 
-    def initialize(name:)
-      @name = name
+    def initialize(key:, &block)
+      @key = key
+      @proc = block
+      @result = nil
+    end
+
+    def run
+      @result = @proc.call
     end
   end
 end
