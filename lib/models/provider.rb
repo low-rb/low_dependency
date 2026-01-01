@@ -2,7 +2,7 @@
 
 module Low
   class Provider
-    attr_reader :key, :result
+    attr_reader :key
 
     def initialize(key:, &block)
       @key = key
@@ -10,8 +10,8 @@ module Low
       @result = nil
     end
 
-    def run
-      @result = @proc.call
+    def result
+      @result ||= @proc.call
     end
   end
 end

@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
-require_relative '../../lib/dependency'
+require_relative '../../lib/low_dependency'
 require_relative '../fixtures/mock_provider'
 
-RSpec.describe 'including a dependency' do
+class IncludeDependency
+  include LowDependency[:mock_provider]
+end
+
+RSpec.describe 'dependencies' do
   before do
     LowDependency.provide(:mock_provider) do
       MockProvider.new
@@ -11,9 +15,10 @@ RSpec.describe 'including a dependency' do
   end
 
   describe 'include LowDependency[:dependency]' do
-    it 'creates an provider' do
+    let(:subject) { IncludeDependency.new }
 
-      expect(described_class.providers[:mock_provider].count).to eq(1)
+    it 'instantiates with dependency' do
+      expect(subject.mock_provider).to be_instance_of(MockProvider)
     end
   end
 

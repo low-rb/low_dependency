@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email = ['maediprichard@gmail.com']
 
   spec.summary = 'Dependency Injection in crisp and clear syntax'
-  spec.description = 'Dependency Injection that augments rather than replaces your constructor'
+  spec.description = 'Automatic Dependency Injection where you get to see and keep control of the constructor'
   spec.homepage = 'https://github.com/low-rb/low_dependency'
   spec.required_ruby_version = '>= 3.3.0'
 
