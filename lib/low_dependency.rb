@@ -42,14 +42,15 @@ class LowDependency
         klass.class_eval do
           @low_dependencies = LowDependency.stack.pop
 
-          def self.low_dependencies
-            @low_dependencies
+          class << self
+            attr_reader :low_dependencies
           end
 
           def initialize
             self.class.low_dependencies.each do |dependency|
               provider = LowDependency.providers[dependency.key]
               raise StandardError, "Provider #{dependency.key} not found" if provider.nil?
+
               instance_variable_set("@#{dependency.var}", provider.result)
             end
           end
