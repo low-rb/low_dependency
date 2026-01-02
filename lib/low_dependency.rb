@@ -23,9 +23,9 @@ class LowDependency
   def self.[](dependencies)
     item = []
 
-    [*dependencies].each do |var_name, key|
-      key = var_name if key.nil?
-      item << (Low::Dependency.new(var_name:) | key)
+    [*dependencies].each do |var, key|
+      key = var if key.nil?
+      item << (Low::Dependency.new(var:) | key)
     end
 
     LowDependency.stack << item

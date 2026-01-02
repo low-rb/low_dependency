@@ -4,13 +4,13 @@ require 'expressions'
 
 module Low
   class Dependency < Expressions::Expression
-    attr_reader :key, :var_name
+    attr_reader :key, :var
 
-    def initialize(var_name:)
+    def initialize(var:)
       super()
 
-      @key = var_name
-      @var_name = var_name
+      @key = var
+      @var = var
     end
 
     private
