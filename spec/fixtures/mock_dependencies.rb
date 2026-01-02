@@ -21,6 +21,10 @@ class IncludeDependencyWithProvider
 end
 
 class IncludeDependencyWithStringProvider
+  include LowDependency[dependency_one: 'provider_one']
+end
+
+class IncludeDependencyWithNamespacedStringProvider
   include LowDependency[dependency_one: 'namespace.provider_one']
 end
 
@@ -43,5 +47,9 @@ class IncludeDependenciesWithProviders
 end
 
 class IncludeDependenciesWithStringProviders
+  include LowDependency[dependency_one: 'provider_one', dependency_two: 'provider_two']
+end
+
+class IncludeDependenciesWithNamespacedStringProviders
   include LowDependency[dependency_one: 'namespace.provider_one', dependency_two: 'namespace.provider_two']
 end
