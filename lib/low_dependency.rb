@@ -32,15 +32,24 @@ class LowDependency
 
     Module.new do
       def self.included(klass)
-        class << klass
+        klass.class_eval do
           @low_dependencies = LowDependency.stack.pop
-        end
-      end
 
-      define_method(:initialize) do
-        binding.pry
-        self.class.low_dependencies.each do |dependency|
-          instance_variable_set(dependency.var_name, LowDependency.providers[dependency.key].result)
+          def self.low_dependencies
+            @low_dependencies
+          end
+
+          def initialize
+            self.class.low_dependencies.each do |dependency|
+              instance_variable_set("@#{dependency.var}", LowDependency.providers[dependency.key].result)
+            end
+          end
+
+          @low_dependencies.each do |dependency|
+            define_method(dependency.var) do
+              instance_variable_get("@#{dependency.var}")
+            end
+          end
         end
       end
     end

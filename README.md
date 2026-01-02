@@ -52,10 +52,10 @@ end
 
 ## Mixing dependency types
 
-LowDependency lets you do something special; mix "classical" dependency injection (passing an arg to `new`) with "automatic" style dependency injection (populating via a provider):
+LowDependency lets you do something special; mix "classical" dependency injection (passing an arg to `new`) with "automatic" style dependency injection (populating an arg via a provider):
 
 ```ruby
-# Define both a "automatic" and a "classical" dependency:
+# Define both an "automatic" and a "classical" dependency:
 class MyClass
   include LowType
 
