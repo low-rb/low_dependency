@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
+require 'low_type'
 require_relative 'expressions/dependency'
-require_relative 'providers'
+require_relative 'factories/dependency_factory'
+require_relative 'repositories/dependencies'
+require_relative 'repositories/providers'
 
 class LowDependency
   class << self
@@ -9,32 +12,12 @@ class LowDependency
       Low::Providers.provide(key:, &block)
     end
 
-    def providers
-      Low::Providers.providers
-    end
-
-    def stack
-      @stack ||= []
-      @stack
-    end
-
     # "include LowDependency[:dependency]"
     def [](*dependencies)
-      item = []
+      class_dependencies = Low::DependencyFactory.parse([*dependencies])
 
-      [*dependencies].each do |dependency|
-        case dependency
-        when Hash
-          key = dependency.keys.first
-          dependency = dependency[key]
-        else
-          key = dependency
-        end
-
-        item << (Low::Dependency.new(var: dependency) | key)
-      end
-
-      LowDependency.stack << item
+      # "include" doesn't know the class that did the include, however "included" happens immediately after.
+      Low::Dependencies.push(class_dependencies:)
 
       included_hook
     end
@@ -43,7 +26,8 @@ class LowDependency
       Module.new do
         def self.included(klass)
           klass.class_eval do
-            @low_dependencies = LowDependency.stack.pop
+            # "include" doesn't know the class that did the include, however "included" happens immediately after.
+            @low_dependencies = Low::Dependencies.pop
 
             class << self
               attr_reader :low_dependencies
@@ -51,7 +35,7 @@ class LowDependency
 
             def initialize
               self.class.low_dependencies.each do |dependency|
-                provider = LowDependency.providers[dependency.key]
+                provider = Low::Providers.find(dependency.key)
                 raise StandardError, "Provider #{dependency.key} not found" if provider.nil?
 
                 var = LowDependency.provider_from_namespace(dependency.var)
@@ -59,14 +43,18 @@ class LowDependency
               end
             end
 
-            @low_dependencies.each do |dependency|
-              var = LowDependency.provider_from_namespace(dependency.var)
-
-              define_method(var) do
-                instance_variable_get("@#{var}")
-              end
-            end
+            LowDependency.define_readers(@low_dependencies, self)
           end
+        end
+      end
+    end
+
+    def define_readers(dependencies, klass)
+      dependencies.each do |dependency|
+        var = provider_from_namespace(dependency.var)
+
+        klass.define_method(var) do
+          instance_variable_get("@#{var}")
         end
       end
     end

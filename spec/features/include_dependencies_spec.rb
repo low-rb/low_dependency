@@ -6,7 +6,7 @@ require_relative '../fixtures/mock_provider'
 
 RSpec.describe 'include LowDependency[:dependency]' do
   after do
-    LowDependency.providers.clear
+    Low::Providers.clear
   end
 
   context 'with a single dependency' do

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'models/provider'
+require_relative '../models/provider'
 
 module Low
   class Providers
@@ -12,6 +12,14 @@ module Low
       def providers
         @providers ||= {}
         @providers
+      end
+
+      def find(provider_key)
+        providers[provider_key]
+      end
+
+      def all
+        providers
       end
 
       def clear
