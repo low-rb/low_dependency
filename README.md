@@ -52,15 +52,15 @@ end
 
 ## Mixing dependency types
 
-LowDependency lets you do something special; mix "classical" dependency injection (passing an arg to `new`) with "automatic" style dependency injection (populating an arg via a provider):
+LowDependency lets you do something special; mix "classical" dependency injection (passing an arg to `new`) with "provider" style dependency injection (populating an arg via a provider):
 
 ```ruby
-# Define both an "automatic" and a "classical" dependency:
+# Define both an "provider" and a "classical" dependency:
 class MyClass
   include LowType
 
-  def initialize(automatic_dependency: Dependency, classical_dependency:)
-    @automatic_dependency = automatic_dependency
+  def initialize(provider_dependency: Dependency, classical_dependency:)
+    @provider_dependency = provider_dependency
     @classical_dependency = classical_dependency
   end
 end
@@ -69,7 +69,7 @@ end
 MyClass.new(classical_dependency: ClassicalDependency.new)
 ```
 
-The `automatic_dependency` argument will automatically be injected by LowDependency!
+The `provider_dependency` argument will automatically be injected by LowDependency!
 
 Now you get to have your classical dependency cake 🍰 and eat it too with an automatically injected dependency spoon 🥣
 
