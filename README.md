@@ -52,7 +52,7 @@ end
 
 ## Mixing dependency types
 
-LowDependency lets you do something special; mix "classical" dependency injection (passing an arg to `new`) with "provider" style dependency injection (populating an arg via a provider):
+LowDependency lets you do something special; mix "classical" dependency injection (passing an arg to `new`) with "provider" style dependency injection (populating an arg via a framework):
 
 ```ruby
 # Define both an "provider" and a "classical" dependency:
